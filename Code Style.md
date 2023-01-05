@@ -1,6 +1,6 @@
-## About Laravel
+## About
 
-First and foremost, Laravel provides the most value when you write things the way Laravel intended you to write. If there's a documented way to achieve something, follow it. Whenever you do something differently, make sure you have a justification for *why* you didn't follow the defaults.
+Most of this document is borrowed from Spatie code style guidelines regarding Laravel. We have changed some things we didn't agree with and added a few new rules.
 
 ## General PHP Rules
 
@@ -8,7 +8,7 @@ Code style must follow [PSR-1](http://www.php-fig.org/psr/psr-1/), [PSR-2](http:
 
 ### Class defaults
 
-By default, we don't use `final`. For our open source stuff, we assume that all our users know they are responsible for writing tests for any overwritten behaviour.
+By default, we don't use `final`. For our open source stuff, we assume that all our users know they are responsible for writing tests for any overwritten behaviour. This is not a hard and fast rule as there may be cases when final classes are required.
 
 ### Void return types
 
@@ -38,7 +38,7 @@ class Foo
 
 Don't use docblocks for methods that can be fully type hinted (unless you need a description).
 
-Only add a description when it provides more context than the method signature itself. Use full sentences for descriptions, including a period at the end.
+Only add a description when it provides more context than the method signature itself. Use full sentences for descriptions.
 
 ```php
 // Good
@@ -58,7 +58,7 @@ class Url
      *
      * @param string $url
      *
-     * @return \Spatie\Url\Url
+     * @return Url
      */
     public static function fromString(string $url): Url
     {
@@ -68,6 +68,7 @@ class Url
 ```
 
 Don't use fully qualified class names in docblocks.
+
 ```php
 // Good
 
@@ -82,7 +83,7 @@ Don't use fully qualified class names in docblocks.
 /**
  * @param string $url
  *
- * @return \Spatie\Url\Url
+ * @return Url
  */
 ```
 
@@ -103,17 +104,17 @@ When possible, docblocks should be written on one line.
 
 If a variable has multiple types, the most common occurring type should be first.
 
-null always last rule?
+If one of the returned types is null, use `|null` syntax. Always put null last.
 
 
 ```php
 // Good
 
-/** @var \Spatie\Goo\Bar|null */
+/** @var Bar|null */
 
 // Bad
 
-/** @var null|\Spatie\Goo\Bar */
+/** @var null|Bar */
 ```
 
 Use `Type|null` instead of `?Type` for type hinting
@@ -393,11 +394,6 @@ If possible use a descriptive success message eg. `Old records deleted`.
 
 Public-facing urls must use kebab-case.
 
-```
-https://spatie.be/open-source
-https://spatie.be/jobs/front-end-developer
-```
-
 Route names must use camelCase.
 
 ```php
@@ -595,6 +591,8 @@ Translations must be rendered with the `__` function. We prefer using this over 
 {!! __('newsletter.form.description') !!}
 ```
 
+Use translation strings, don't hard-code strings even messages in controllers, responses and exceptions. This also applies to data like the app name, company name, company address, etc. Things may change over time.
+
 ## Naming Classes
 
 Naming things is often seen as one of the harder things in programming. That's why we've established some high level guidelines for naming classes.
@@ -643,26 +641,26 @@ Again to avoid naming collisions we'll suffix mailables with `Mail`, as they're 
 
 e.g. `AccountActivatedMail` or `NewEventMail`
 
----
+## Errors
 
-- Use translation strings, don't hard-code strings even messages in controllers, responses and exceptions. This also applies to data like the app name, company name, company address, etc. Things may change over time.
+Present the user clear and informative error messages. Never assume the user knows why something fails.
 
-- Present the user clear and informative error messages. Never assume the user knows why something fails.
-    - Include unique codes and a user friendly message
-    ```
-    {
-        "message": "Invalid Vendor for Promotion",
-        "code": 1003
-    }
-    ```
-    - Each module error codes should start with a specific number. For example all error codes between 1001 and 1999 belong to Order module.
+Include unique codes and a user friendly message. Developers using you APIs should be able to rely on status codes and exception codes.
+```
+{
+    "message": "Invalid Vendor for Promotion",
+    "code": 1003
+}
+```
 
-- Use the static query() method to begin querying an Eloquent Model.
+Each module error codes should start with a specific number. For example all error codes between 1001 and 1999 belong to OrderModule and all error codes between 2001 and 2999 belong to ProductModule.
 
-- If you need to display a set of database records, always use pagination.
+## Eloquent
 
-- Never leak Eloquent Models into the front-end. Always use Response classes.
+If you need to display a set of database records, always use pagination.
 
-- Prefer timestamps over booleans. For example, published_at instead of is_published.
+Never leak Eloquent Models into the front-end. Always use Response classes.
 
-- Always prevent the lazy loading of relationships.
+Prefer timestamps over booleans. For example, published_at instead of is_published.
+
+Always prevent the lazy loading of relationships.
