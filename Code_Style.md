@@ -1,4 +1,4 @@
-## About
+# Code Style
 
 Most of this document is borrowed from Spatie code style guidelines regarding Laravel. We have changed some things we didn't agree with and added a few new rules.
 
