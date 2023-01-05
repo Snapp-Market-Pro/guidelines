@@ -646,7 +646,7 @@ e.g. `AccountActivatedMail` or `NewEventMail`
 Present the user clear and informative error messages. Never assume the user knows why something fails.
 
 Include unique codes and a user friendly message. Developers using you APIs should be able to rely on status codes and exception codes.
-```
+```json
 {
     "message": "Invalid Vendor for Promotion",
     "code": 1003
