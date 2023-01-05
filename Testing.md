@@ -1,10 +1,15 @@
 # Testing
 
-- Use PHPUnit
-- No hard rules on coverage but using it can help with removing unused code, etc.
-- Write Unit Tests for Repositories using database assertions.
-- Mock Repositories in Feature tests.
-- Feature tests for all API endpoints and Module API Interface methods.
-- Write as much unit tests as you can!
-- If a middleware is disabled in Feature tests make sure to unit test it.
-- Test relationship retrun types.
+Use PHPUnit.
+
+No hard rules on coverage but using it can help with removing unused code, etc.
+
+Try to write Unit Tests for Repositories using database assertions.
+
+Feature tests for all API endpoints and Module API Interface methods.
+
+If a middleware is disabled in Feature tests make sure to unit test it.
+
+Test relationship retrun types.
+
+Use `/** @test */` syntax for test cases and use snake case to make cases easier to read.
