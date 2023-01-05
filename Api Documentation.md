@@ -1,4 +1,5 @@
 # API Documentation
 
 - Use OpenAPI documentation for all public APIs.
-- Test implementation against API sepcification using tools like `Laravel Spectator`
+- Having OpenAPI documentation for internal APIs is preferable.
+- Test implementation against API sepcification using such as `league/openapi-psr7-validator`. This helps ensure our documentation doesn't get left behind when changes are made.
