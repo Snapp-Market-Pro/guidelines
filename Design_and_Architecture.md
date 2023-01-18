@@ -7,8 +7,6 @@ Module API interface should accept Input objects and return output objects that 
 
 Module API interface cannot include actions because actions include transactions and when other modules need to use API interface of other modules they require control over transactions.
 
-Module API interface should not throw exceptions.
-
 Modules can only call other module API interface methods in their Actions or Services.
 
 ```
