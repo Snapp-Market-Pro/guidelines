@@ -664,3 +664,9 @@ Never leak Eloquent Models into the front-end. Always use Response classes.
 Prefer timestamps over booleans. For example, published_at instead of is_published.
 
 Always prevent the lazy loading of relationships.
+
+## Migrations
+
+Use the int size that you think would make sense, it does have performance implication accorgin to MySQL docs.
+
+When declaring enums that correspond to array of constants or cases of an enum DO NOT use it in migration. Write out the concrete values for that enum at the time of writing the migration. Think about adding new cases and constants in the future and you will know the reason.
