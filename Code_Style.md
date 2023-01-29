@@ -667,6 +667,10 @@ Always prevent the lazy loading of relationships.
 
 ## Migrations
 
-Use the int size that you think would make sense, it does have performance implication accorgin to MySQL docs.
+Use the int size that you think would make sense, it does have performance implication according to MySQL docs.
 
 When declaring enums that correspond to array of constants or cases of an enum DO NOT use it in migration. Write out the concrete values for that enum at the time of writing the migration. Think about adding new cases and constants in the future and you will know the reason.
+
+## Enum
+
+Favor PascalCase over UPPERCASE notation for enums because the [RFC](https://wiki.php.net/rfc/enumerations) showed them in this form.
