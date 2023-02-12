@@ -38,7 +38,37 @@ Each controller method handles business logic using one Action.
 
 Actions begin, commit and rollback transactions.
 
-Actions use services or other modules API interface.
+Actions use services, repository or service locator interface.
+
+Actions must not return HTTP responses and may send raw data (for simple structure and types) or
+action response DTO located in ``Modules/Actions/Responses``.
+
+Bellow demonstrate simple relationship between controller and action:
+
+**User/Http/Controllers/RegistrationController.php**
+```php
+public function store(RegistrationRequest $request, Register $action)
+{
+    $output = $action->execute($request);
+
+    return new RegistrationResponse($output['user'], $output['token']);
+}
+```
+
+**User/Actions/Register.php**
+```php
+/** @return array{user: User, token: string} */
+public function execute(RegistrationRequest $request): array
+{
+    // ...
+
+    $user = $this->userRepository->create($payload);
+
+    $token = $this->authService->generateJWT();
+
+    return compact('user', 'token');
+}
+```
 
 ## Controllers
 
