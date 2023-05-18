@@ -12,7 +12,7 @@ By default, we don't use `final`. For our open source stuff, we assume that all 
 
 ### Void return types
 
-If a method return nothing, it should be indicated with `void`. 
+If a method returns nothing, it should be indicated with `void`. 
 This makes it more clear to the users of your code what your intention was when writing it.
 
 ## Typed properties
@@ -91,12 +91,10 @@ When possible, docblocks should be written on one line.
 
 ```php
 // Good
-
 /** @var string */
 /** @test */
 
 // Bad
-
 /**
  * @test
  */
@@ -266,7 +264,7 @@ if ($conditionA && $conditionB && $conditionC) {
 
 ## Comments
 
-Comments should be avoided as much as possible by writing expressive code. If you do need to use a comment, format it like this:
+Expressive code is better than hard to read code with comments. If you do need to use a comment, format it like this:
 
 ```php
 // There should be a space before a single line comment.
@@ -280,7 +278,7 @@ Comments should be avoided as much as possible by writing expressive code. If yo
 
 ## Whitespace
 
-Statements should have to breathe. In general always add blank lines between statements, unless they're a sequence of single-line equivalent operations. This isn't something enforceable, it's a matter of what looks best in its context.
+Statements should be able to breathe. In general always add blank lines between statements, unless they're a sequence of single-line equivalent operations. This isn't something enforceable, it's a matter of what looks best in its context.
 
 ```php
 // Good
@@ -521,7 +519,7 @@ class OpenSourceController
 
 ## Validation
 
-When using multiple rules for one field in a form request, avoid using `|`, always use array notation. Using an array notation will make it easier to apply custom rule classes to a field.
+When using multiple rules for one field in a form request, avoid using `|`, always use array notation. Using array notation will make it easier to apply custom rule classes to a field without changing all other rules fro string format to array format.
 
 ```php
 // good
@@ -653,7 +651,7 @@ Include unique codes and a user friendly message. Developers using you APIs shou
 }
 ```
 
-Each module error codes should start with a specific number. For example all error codes between 1001 and 1999 belong to OrderModule and all error codes between 2001 and 2999 belong to ProductModule.
+Each module error codes should start with a specific number. For example all error codes between `1001` and `1999` belong to `OrderModule` and all error codes between `2001` and `2999` belong to `ProductModule`.
 
 ## Eloquent
 
@@ -667,10 +665,14 @@ Always prevent the lazy loading of relationships.
 
 ## Migrations
 
-Use the int size that you think would make sense, it does have performance implication according to MySQL docs.
-
 When declaring enums that correspond to array of constants or cases of an enum DO NOT use it in migration. Write out the concrete values for that enum at the time of writing the migration. Think about adding new cases and constants in the future and you will know the reason.
+```
+// bad
+$table->enum('type', array_map(fn (Type $t) => $t->value, Type::cases()));
 
-## Enum
+// good
+$table->enum('type', [Type::One->value, Type::Two->value, Type::Three->value]);
+
+## Enums
 
 Favor PascalCase over UPPERCASE notation for enums because the [RFC](https://wiki.php.net/rfc/enumerations) showed them in this form.
