@@ -666,13 +666,20 @@ Always prevent the lazy loading of relationships.
 ## Migrations
 
 When declaring enums that correspond to array of constants or cases of an enum DO NOT use it in migration. Write out the concrete values for that enum at the time of writing the migration. Think about adding new cases and constants in the future and you will know the reason.
-```
+```php
 // bad
 $table->enum('type', array_map(fn (Type $t) => $t->value, Type::cases()));
 
 // good
 $table->enum('type', [Type::One->value, Type::Two->value, Type::Three->value]);
+```
 
 ## Enums
 
 Favor PascalCase over UPPERCASE notation for enums because the [RFC](https://wiki.php.net/rfc/enumerations) showed them in this form.
+
+## Repositories
+- When returning only one result use find followed by the conditions for example `findById()` or `findByPhoneNumber()` and throw exception instead of returning null in case no result is found for example `UserNotFoundException` or `OrderNotFoundException`.
+- When returning multiple results use get followed by the conditions for example `getByType()` or `get(int $page, int $perPage)` and return `Enumerable`.
+- When creating many use `persistMany`.
+- When creating or updating one use `save`.
