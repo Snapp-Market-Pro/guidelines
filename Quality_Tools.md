@@ -1,8 +1,8 @@
 # Quality Tools
 
 ## PhpStan
-- Use PhpStan.
-- Use level 8 for now.
+- Use PhpStan for static analysis.
+- Level 8 is a good default as it is much more feasible than level 9 yet strict enough that it can stop many major bugs.
 
 ## PHP-CS-FIXER
 php-cs-fixer config:
