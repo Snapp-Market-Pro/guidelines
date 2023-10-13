@@ -1,15 +1,15 @@
 # Testing
 
-Use PHPUnit.
+- Use PHPUnit.
 
-No hard rules on coverage but using it can help with removing unused code, etc.
+- Tests should generally cover the public interface of projects, it can be public methods for a library, api endpoints for an API backend or Module Interfaces in a modular monolith.
 
-Try to write Unit Tests for Repositories using database assertions.
+- No hard rules on coverage but using it can help with removing unused code, etc.
 
-Feature tests for all API endpoints and Module API Interface methods.
+- Unit Testing complicated Repository methods using Laravel database assertions can be beneficial and easier than trying to cover all query scenarios in Feature tests.
 
-If a middleware is disabled in Feature tests make sure to unit test it.
+- Feature tests for all API endpoints and Module API Interface methods.
 
-Test relationship retrun types.
+- If a middleware is disabled in Feature tests make sure to unit test it.
 
-Use `/** @test */` syntax for test cases and use snake case to make cases easier to read.
+- Use `#[Test]` attribute syntax for test cases and use snake case to make cases easier to read.
