@@ -40,8 +40,7 @@ Actions begin, commit and rollback transactions.
 
 Actions use services, repository or service locator interface.
 
-Actions must not return HTTP responses and may send raw data (for simple structure and types) or
-action response DTO located in ``Modules/Actions/Responses``.
+Actions must not return HTTP responses and may send raw data (for simple structure and types) or DTOs.
 
 Bellow demonstrate simple relationship between controller and action:
 
@@ -124,3 +123,7 @@ foreach ($order->getOrderProducts() as $$orderProduct) {
     $orderProduct->setProduct($products[$orderProduct->getProductId()]);
 }
 ```
+
+## DTOs
+
+If needed, services and actions can accept or return Data Objects defined in `Modules/{Module}/Dto` namespace.
