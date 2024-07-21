@@ -6,8 +6,6 @@
 
 - No hard rules on coverage but using it can help with removing unused code, etc.
 
-- Unit Testing complicated Repository methods using Laravel database assertions can be beneficial and easier than trying to cover all query scenarios in Feature tests.
-
 - Feature tests for all API endpoints and Module API Interface methods.
 
 - If a middleware is disabled in Feature tests make sure to unit test it.
