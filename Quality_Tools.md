@@ -15,7 +15,7 @@ php-cs-fixer config:
     'array_syntax' => ['syntax' => 'short'],
     'ordered_imports' => [
         'imports_order' => null,
-        'sort_algorithm' => 'length',
+        'sort_algorithm' => 'alpha',
     ],
     'phpdoc_types_order' => [
         'null_adjustment' => 'always_last',
@@ -37,5 +37,12 @@ php-cs-fixer config:
     'no_unused_imports' => true,
     'phpdoc_scalar' => true,
     'simple_to_complex_string_variable' => true,
+    'single_quote' => [
+        'strings_containing_single_quote_chars' => true,
+    ],
+    'class_attributes_separation' => [
+        'elements' => ['method' => 'one']
+    ],
+    'modernize_types_casting' => true,
 ]
 ```
