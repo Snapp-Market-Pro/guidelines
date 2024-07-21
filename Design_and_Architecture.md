@@ -36,8 +36,6 @@ Services can use other services and other modules API interface but not Actions.
 
 Each controller method handles business logic using one Action.
 
-Actions begin, commit and rollback transactions.
-
 Actions use services, repository or service locator interface.
 
 Actions must not return HTTP responses and may send raw data (for simple structure and types) or DTOs.
@@ -48,7 +46,14 @@ Bellow demonstrate simple relationship between controller and action:
 ```php
 public function store(RegistrationRequest $request, Register $action)
 {
-    $output = $action->execute($request);
+    DB::beginTransaction();
+    try {
+        $output = $action->execute($request);
+        DB::commit();
+    } catch (Throwable $e) {
+        DB::rollback();
+        throw $e
+    }
 
     return new RegistrationResponse($output['user'], $output['token']);
 }
@@ -74,6 +79,7 @@ public function execute(RegistrationRequest $request): array
 Responsibilites:
 - Handle Request validation using Form Requests.
 - Call Actions to perform business logic.
+- Use database transactions.
 - Handle Response structure using Response classes that extend `Illuminate\Http\JsonResponse` class. They should be in `HTTP\Responses` namespace. Example error response using Response class:
     ```php
     class PromotionUnavailableResponse extends JsonResponse
