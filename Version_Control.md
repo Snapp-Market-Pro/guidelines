@@ -8,4 +8,4 @@
 - `task/JIRA_TICKET_ID/short-description`: Used for features and improvements.
 - `bugfix/JIRA_TICKET_ID/short-description`: Used for bug fixes!
 - `refactor/short-description`: Refactoring production code to make it more readable or extensible.
-- `chroe/short-description`: Anything else, such as adding tests, updating documentation or removing unused code.
+- `chore/short-description`: Anything else, such as adding tests, updating documentation or removing unused code.
