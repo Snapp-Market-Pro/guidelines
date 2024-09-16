@@ -682,4 +682,21 @@ Favor PascalCase over UPPERCASE notation for enums because the [RFC](https://wik
 - When returning only one result use find followed by the conditions for example `findById()` or `findByPhoneNumber()` and throw exception instead of returning null in case no result is found for example `UserNotFoundException` or `OrderNotFoundException`.
 - When returning multiple results use get followed by the conditions for example `getByType()` or `get(int $page, int $perPage)` and return `Enumerable`.
 - When creating many use `persistMany`.
+```php
+class UserRepository {
+    //bulk insert
+    public function persistMany(Enumerable $users) {
+        $users = array_map(
+            function (User $u) {
+                $output = $u->getAttributes();
+                $output['created_at'] = Carbon::now()->toDateTimeString();
+                $output['updated_at'] = Carbon::now()->toDateTimeString();
+                return $output;
+            },
+            $users->all(),
+        );
+        DB::table('users')->insert($users);
+    }
+}
+```
 - When creating or updating one use `save`.
